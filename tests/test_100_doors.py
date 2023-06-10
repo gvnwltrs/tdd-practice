@@ -2,7 +2,7 @@
 
 import unittest
 
-import testmodules.one_hundred_doors as doors
+import testmodules.one_hundred_doors as Doors 
 
 # There are 100 doors in a row that are all closed. You make 100 passes through the doors. With each pass you toggle the doors state. On each pass you visit the Nth door. That is on the first pass you visit every door. On the second pass you visit every 2nd door. On the third pass you visit every 3rd door and so on until you complete the 100th pass.
 #
@@ -25,10 +25,30 @@ import testmodules.one_hundred_doors as doors
 
 class Test100Doors(unittest.TestCase):
 
-    def test_for_100_doors(self):
+    @classmethod
+    def setUpClass(cls):
+        cls.doors = Doors.OneHundredDoors()
+        cls.doors.set_up_doors()
 
-        state_of_doors = doors.OneHundredDoors().doors
-        self.assertEqual(100, len(state_of_doors))
+    def test_for_100_doors(self):
+        self.assertEqual(100, len(self.doors.state))
+    
+    def test_for_doors_closed(self):
+        self.doors.set_doors_closed()
+        expected_state = ['#'] * 100
+        self.assertEqual(expected_state, self.doors.state)
+
+    def test_doors_first_pass(self):
+        self.doors.first_pass()
+        expected_state = ['@'] * 100
+        self.assertEqual(expected_state, self.doors.state)
+
+    def test_doors_second_pass(self):
+        self.doors.second_pass()
+        expected_state = ['@', '#'] * 50
+        self.assertEqual(expected_state, self.doors.state)
 
 if __name__ == '__main__':
     unittest.main()
+
+
