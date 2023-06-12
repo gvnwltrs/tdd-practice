@@ -62,7 +62,7 @@ class Test100Doors(unittest.TestCase):
 
     #@unittest.skip('none of your business')
     def test_100_doors(self):
-        self.doors.run_100_doors(99)
+        self.doors.run_100_doors(100)
         expected_state = ['@', '#', '#', '@', '#', '#']
         self.assertEqual(expected_state, self.doors.state[:6])
 
