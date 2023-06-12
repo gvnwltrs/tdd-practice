@@ -22,7 +22,11 @@ class OneHundredDoors:
 
     def third_pass(self):
         for i in range(2, len(self.state), 3):
-            self.state[i] = '#'
+            if self.state[i] == '@':
+                self.state[i] = '#'
+            elif self.state[i] == '#':
+                self.state[i] = '@'
+                
 
 if __name__ == '__main__':
     pass
