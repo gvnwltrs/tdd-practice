@@ -17,8 +17,12 @@ class OneHundredDoors:
             self.state[i] = '@'
 
     def second_pass(self):
-        for i in range(0, len(self.state), 2):
-            self.state[i+1] = '#'
+        for i in range(1, len(self.state), 2):
+            self.state[i] = '#'
+
+    def third_pass(self):
+        for i in range(2, len(self.state), 3):
+            self.state[i] = '#'
 
 if __name__ == '__main__':
     pass

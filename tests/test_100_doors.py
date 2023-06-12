@@ -48,6 +48,11 @@ class Test100Doors(unittest.TestCase):
         expected_state = ['@', '#'] * 50
         self.assertEqual(expected_state, self.doors.state)
 
+    def test_doors_third_pass(self):
+        self.doors.third_pass()
+        expected_state = ['@' if (i + 1) % 3 == 0 else '#' for i in range(100)]
+        self.assertEqual(expected_state, self.doors.state)
+
 if __name__ == '__main__':
     unittest.main()
 
