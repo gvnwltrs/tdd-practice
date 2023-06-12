@@ -4,29 +4,29 @@ class OneHundredDoors:
     def __init__(self):
         self.state = None 
 
+    def run_100_doors(self, passes):
+        self.set_up_doors()
+        self.set_doors_closed()
+        for i in range(passes):
+            self.door_pass(i, i+1)
+
+        
     def set_up_doors(self):
         self.state = [None] * 100
-
 
     def set_doors_closed(self):
         for i in range(len(self.state)):
             self.state[i] = '#'
 
-    def first_pass(self):
-        for i in range(len(self.state)):
-            self.state[i] = '@'
+    def door_pass(self, start, step):
+        for i in range(start, len(self.state), step):
+            self.toggle_door(i)
 
-    def second_pass(self):
-        for i in range(1, len(self.state), 2):
-            self.state[i] = '#'
-
-    def third_pass(self):
-        for i in range(2, len(self.state), 3):
-            if self.state[i] == '@':
-                self.state[i] = '#'
-            elif self.state[i] == '#':
-                self.state[i] = '@'
-                
+    def toggle_door(self, i):
+        if self.state[i] == '#':
+            self.state[i] = '@' #open
+        else:
+            self.state[i] = '#' #close
 
 if __name__ == '__main__':
     pass

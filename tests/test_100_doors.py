@@ -22,6 +22,8 @@ import testmodules.one_hundred_doors as Doors
 # Add a third state of holding (use H). By adding this state, you must toggle between open, holding and closed when visiting the doors.
 # How could you have better abstracted the problem to make these adjustments simpler?
 
+# # = closed
+# @ = open 
 
 class Test100Doors(unittest.TestCase):
 
@@ -30,7 +32,12 @@ class Test100Doors(unittest.TestCase):
         cls.doors = Doors.OneHundredDoors()
         cls.doors.set_up_doors()
 
+    def tearDown(self):
+        self.doors = Doors.OneHundredDoors() 
+        self.doors.set_up_doors()
+
     def test_for_100_doors(self):
+        self.doors.set_up_doors()
         self.assertEqual(100, len(self.doors.state))
     
     def test_for_doors_closed(self):
@@ -39,18 +46,24 @@ class Test100Doors(unittest.TestCase):
         self.assertEqual(expected_state, self.doors.state)
 
     def test_doors_first_pass(self):
-        self.doors.first_pass()
+        self.doors.run_100_doors(1)
         expected_state = ['@'] * 100
         self.assertEqual(expected_state, self.doors.state)
 
     def test_doors_second_pass(self):
-        self.doors.second_pass()
-        expected_state = ['@', '#'] * 50
-        self.assertEqual(expected_state, self.doors.state)
+        self.doors.run_100_doors(2)
+        expected_state = ['@', '#', '@', '#', '@', '#']
+        self.assertEqual(expected_state, self.doors.state[:6])
 
     def test_doors_third_pass(self):
-        self.doors.third_pass()
+        self.doors.run_100_doors(3)
         expected_state = ['@', '#', '#', '#', '@', '@']
+        self.assertEqual(expected_state, self.doors.state[:6])
+
+    #@unittest.skip('none of your business')
+    def test_100_doors(self):
+        self.doors.run_100_doors(99)
+        expected_state = ['@', '#', '#', '@', '#', '#']
         self.assertEqual(expected_state, self.doors.state[:6])
 
 if __name__ == '__main__':
