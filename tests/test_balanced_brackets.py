@@ -34,9 +34,25 @@ class TestBalancedBrackets(unittest.TestCase):
         expected_result = "" 
         self.assertIsInstance(expected_result, type(self.balancer.brackets))
 
-    def test_check_for_closing_bracket(self):
-        expected_result = True
-        self.assertTrue(self.balancer.check_closing_brackets())
+    def test_check_for_balanced_bracket(self):
+        string = "[]"
+        self.assertTrue(self.balancer.check_closing_brackets(string))
+
+    def test_check_for_complex_balanced_closing_bracket(self):
+        string = "[[[[]]]]"
+        self.assertTrue(self.balancer.check_closing_brackets(string))
+
+    def test_check_for_unbalanced_closing_bracket(self):
+        string = "[]]"
+        self.assertFalse(self.balancer.check_closing_brackets(string))
+
+    def test_check_for_complex_unbalanced_closing_bracket(self):
+        string = "[[]]]]"
+        self.assertFalse(self.balancer.check_closing_brackets(string))
+
+    def test_check_for_unbalanced_closing_bracket_starting(self):
+        string = "]["
+        self.assertFalse(self.balancer.check_closing_brackets(string))
 
 if __name__ == '__main__':
     main.unittest()
