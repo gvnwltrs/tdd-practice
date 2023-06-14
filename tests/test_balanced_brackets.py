@@ -23,14 +23,20 @@
 # Start off returning string.empty as the default condition. This will allow you properly work the red-green-refactor cycle.
 
 import unittest
-import testmodules.balanced_brackets
+import testmodules.balanced_brackets as bb
 
 class TestBalancedBrackets(unittest.TestCase):
-    pass
 
-    def test_this(self):
-        pass
+    def setUp(cls):
+        cls.balancer = bb.BalancedBrackets()
+
+    def test_get_a_string(self):
+        expected_result = "" 
+        self.assertIsInstance(expected_result, type(self.balancer.brackets))
+
+    def test_check_for_closing_bracket(self):
+        expected_result = True
+        self.assertTrue(self.balancer.check_closing_brackets())
 
 if __name__ == '__main__':
     main.unittest()
-    pass
