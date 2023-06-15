@@ -9,6 +9,7 @@ class OneHundredDoors:
         self.set_doors_closed()
         for i in range(passes):
             self.door_pass(i, i+1)
+        print('Done! ', self.state)
 
         
     def set_up_doors(self):
