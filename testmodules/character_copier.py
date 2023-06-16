@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-import testmodules.IDestination as IDestination
-import testmodules.ISource as ISource
+from testmodules.IDestination import IDestination
+from testmodules.ISource import ISource
 
-class CharacterCopier(ISource, IDestination):
+class CharacterCopier(IDestination):
     def __init__(self):
-        pass
+        super().__init__()
 
     def copy(self, character):
         pass

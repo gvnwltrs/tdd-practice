@@ -1,7 +1,9 @@
 #!/usr/bin/env python3 
 
-import testmodules.one_hundred_doors as doors
+from testmodules.character_copier import CharacterCopier
 
 if __name__ == '__main__':
-    my_doors = doors.OneHundredDoors()
-    my_doors.run_100_doors(100)
+    cc = CharacterCopier()
+
+    cc.get_value()
+

@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
+import sys
 
-from typing import TypeVar, Generic
+class ISource():
+    def __init__(self):
+        self.char = '' 
 
-T = TypeVar('T')
+    def getchar(self):
+        while True:
+            c = sys.stdin.read(1)
+            if c == ' ':
+                break
+            self.char += c 
 
-class ISource(Generic[T]):
-    def __init__(self, value: T):
-        self.value = value
-
-    def get_value(self) -> T:
-        return self.value

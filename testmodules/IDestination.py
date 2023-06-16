@@ -1,11 +1,9 @@
-from typing import TypeVar, Generic
+#!/usr/bin/env python3 
 
-T = TypeVar('T')
+class IDestination():
+    def __init__(self):
+        self.string = '' 
 
-class IDestination(Generic[T]):
-    def __init__(self, value: T):
-        self.value = value
-
-    def get_value(self) -> T:
-        return self.value
+    def setchar(self, c):
+        self.string += c
 

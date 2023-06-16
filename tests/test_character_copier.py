@@ -11,20 +11,27 @@ class TestCharacterCopier(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.CharacterCopier = cc.CharacterCopier()
-        cls.ISource = isource.ISource("c")
-        cls.IDestination = idestination.IDestination("c")
+        cls.ISource = isource.ISource()
+        cls.IDestination = idestination.IDestination()
 
     def tearDown(self):
-        pass
+        self.CharacterCopier = cc.CharacterCopier()
+        self.ISource = isource.ISource()
+        self.IDestination = idestination.IDestination()
 
     def test_for_copy(self):
         pass
 
     def test_for_read_char(self):
-        pass
+        self.ISource.getchar()
+        expected_result = self.ISource.char
+        self.assertIsInstance(expected_result, str)
 
     def test_for_write_char(self):
-        pass
+        self.ISource.getchar()
+        self.IDestination.setchar(self.ISource.char)
+        expected_result = "abcd"
+        self.assertEqual(expected_result, self.IDestination.string)
 
 if __name__ == '__main__':
     unittest.main()
