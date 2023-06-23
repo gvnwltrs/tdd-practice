@@ -5,5 +5,5 @@ from testmodules.character_copier import CharacterCopier
 if __name__ == '__main__':
     cc = CharacterCopier()
 
-    cc.get_value()
+    cc.copy('c')
 

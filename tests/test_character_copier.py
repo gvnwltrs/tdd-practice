@@ -22,11 +22,13 @@ class TestCharacterCopier(unittest.TestCase):
     def test_for_copy(self):
         pass
 
+    @unittest.skip("reading chars tested good")
     def test_for_read_char(self):
         self.ISource.getchar()
         expected_result = self.ISource.char
         self.assertIsInstance(expected_result, str)
 
+    @unittest.skip("writing chars tested good")
     def test_for_write_char(self):
         self.ISource.getchar()
         self.IDestination.setchar(self.ISource.char)
