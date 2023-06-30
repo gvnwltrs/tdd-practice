@@ -28,11 +28,44 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
+        cls.hmb.init_store()
 
-    def test_for_bake_sale_items(self):
-        self.hmb.init_store()
+    def test_for_inventory(self):
         expected_result = len(self.hmb.store)
         self.assertTrue(expected_result) 
+
+    def test_for_brownie(self):
+        expected_result = {'Brownie': '0.75', 'Quantity': '48', 'Purchase Code': 'B'}
+        self.assertEqual(expected_result, self.hmb.store['Item1'])
+        
+    def test_for_muffin(self):
+        expected_result = {'Muffin': '1.00', 'Quantity': '36', 'Purchase Code': 'M'}
+        self.assertEqual(expected_result, self.hmb.store['Item2'])
+
+    def test_for_cake_pop(self):
+        expected_result = {'Cake Pop': '1.35', 'Quantity': '24', 'Purchase Code': 'C'}
+        self.assertEqual(expected_result, self.hmb.store['Item3'])
+
+    def test_for_water(self):
+        expected_result = {'Water': '1.50', 'Quantity': '30', 'Purchase Code': 'W'}
+        self.assertEqual(expected_result, self.hmb.store['Item4'])
+
+    def test_for_purchase_made(self):
+        items_list = ['B', 'B', 'W']
+        purchase_made = self.hmb.purchase_items(items_list)
+        self.assertTrue(purchase_made)
+
+    def test_for_valid_purchase_item(self):
+        items_list = ['B', 'B', 'W']
+        items_valid = self.hmb.check_for_items_valid(items_list)
+        self.assertTrue(items_valid)
+
+    def test_for_quantity_available(self):
+        item = 'B'
+        item_avaiable = self.hmb.quantity_available(item)
+        self.assertTrue(item_avaiable)
+
+
 
 
 

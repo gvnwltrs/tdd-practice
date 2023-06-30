@@ -2,7 +2,13 @@
 
 class HeavyMetalBakeSale:
     def __init__(self):
+        self.__PURCHASE_CODES = {'B': 'Item1', 
+                                 'C': 'Item2', 
+                                 'M': 'Item3', 
+                                 'W': 'Item4'}
+
         self.store = {}
+        self.expected_change = 0.00
 
     def init_store(self):
         
@@ -29,4 +35,27 @@ class HeavyMetalBakeSale:
             },
 
         }
+
+    def purchase_items(self, items_list):
+        if not self.check_for_items_valid(items_list):
+            return False
+
+        return True
+
+    def check_for_items_valid(self, items_list):
+        for item in items_list:
+            if item in self.__PURCHASE_CODES:
+                continue
+            else:
+                return False
+
+        return True
+
+    def quantity_available(self, item):
+        if int(self.store[self.__PURCHASE_CODES[item]]['Quantity']) < 0:
+            return False
+        else:
+            return True
+        
+
 
