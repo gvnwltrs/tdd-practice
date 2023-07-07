@@ -30,6 +30,9 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
         cls.hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
         cls.hmb.init_store()
 
+    def tearDown(self):
+        self.hmb = None 
+
     def test_for_inventory(self):
         expected_result = len(self.hmb.store)
         self.assertTrue(expected_result) 
@@ -52,7 +55,10 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
 
     def test_for_purchase_made(self):
         items_list = ['B', 'B', 'W']
-        purchase_made = self.hmb.purchase_items(items_list)
+        hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
+        hmb.init_store()
+        hmb.reduce_amount(items_list)
+        purchase_made = hmb.purchase_items(items_list)
         self.assertTrue(purchase_made)
 
     def test_for_valid_purchase_item(self):
@@ -67,9 +73,11 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
     
     def test_for_reduced_quantity_for_purchase(self):
         items = ['B', 'B', 'B']
-        self.hmb.reduce_amount(items)
+        hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
+        hmb.init_store()
+        hmb.reduce_amount(items)
         expected_value = '45' 
-        self.assertEqual(expected_value, self.hmb.store['Item1']['Quantity'])
+        self.assertEqual(expected_value, hmb.store['Item1']['Quantity'])
 
 if __name__ == '__main__':
    unittest.main() 

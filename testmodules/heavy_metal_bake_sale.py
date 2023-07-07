@@ -40,7 +40,7 @@ class HeavyMetalBakeSale:
         if not self.check_for_items_valid(items_list):
             return False
 
-        #self.reduce_amount(items_list)        
+        self.reduce_amount(items_list)        
 
         return True
 
