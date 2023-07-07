@@ -64,10 +64,12 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
         item = 'B'
         item_avaiable = self.hmb.quantity_available(item)
         self.assertTrue(item_avaiable)
-
-
-
-
+    
+    def test_for_reduced_quantity_for_purchase(self):
+        items = ['B', 'B', 'B']
+        self.hmb.reduce_amount(items)
+        expected_value = '45' 
+        self.assertEqual(expected_value, self.hmb.store['Item1']['Quantity'])
 
 if __name__ == '__main__':
    unittest.main() 

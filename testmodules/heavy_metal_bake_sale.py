@@ -40,6 +40,8 @@ class HeavyMetalBakeSale:
         if not self.check_for_items_valid(items_list):
             return False
 
+        #self.reduce_amount(items_list)        
+
         return True
 
     def check_for_items_valid(self, items_list):
@@ -52,10 +54,15 @@ class HeavyMetalBakeSale:
         return True
 
     def quantity_available(self, item):
-        if int(self.store[self.__PURCHASE_CODES[item]]['Quantity']) < 0:
+        if int(self.store[self.__PURCHASE_CODES[item]]['Quantity']) < 1:
             return False
         else:
             return True
+
+    def reduce_amount(self, items_list):
+        for item in items_list:
+           self.store[self.__PURCHASE_CODES[item]]['Quantity'] = int(self.store[self.__PURCHASE_CODES[item]]['Quantity']) - 1
+           self.store[self.__PURCHASE_CODES[item]]['Quantity'] = str(self.store[self.__PURCHASE_CODES[item]]['Quantity'])
         
 
 
