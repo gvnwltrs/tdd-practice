@@ -39,19 +39,19 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
 
     def test_for_brownie(self):
         expected_result = {'Brownie': '0.75', 'Quantity': '48', 'Purchase Code': 'B'}
-        self.assertEqual(expected_result, self.hmb.store['Item1'])
+        self.assertEqual(expected_result, self.hmb.store['B'])
         
     def test_for_muffin(self):
         expected_result = {'Muffin': '1.00', 'Quantity': '36', 'Purchase Code': 'M'}
-        self.assertEqual(expected_result, self.hmb.store['Item2'])
+        self.assertEqual(expected_result, self.hmb.store['M'])
 
     def test_for_cake_pop(self):
         expected_result = {'Cake Pop': '1.35', 'Quantity': '24', 'Purchase Code': 'C'}
-        self.assertEqual(expected_result, self.hmb.store['Item3'])
+        self.assertEqual(expected_result, self.hmb.store['C'])
 
     def test_for_water(self):
         expected_result = {'Water': '1.50', 'Quantity': '30', 'Purchase Code': 'W'}
-        self.assertEqual(expected_result, self.hmb.store['Item4'])
+        self.assertEqual(expected_result, self.hmb.store['W'])
 
     def test_for_purchase_made(self):
         items_list = ['B', 'B', 'W']
@@ -68,8 +68,8 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
 
     def test_for_quantity_available(self):
         item = 'B'
-        item_avaiable = self.hmb.quantity_available(item)
-        self.assertTrue(item_avaiable)
+        item_available = self.hmb.quantity_available(item)
+        self.assertTrue(item_available)
     
     def test_for_reduced_quantity_for_purchase(self):
         items = ['B', 'B', 'B']
@@ -77,7 +77,13 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
         hmb.init_store()
         hmb.reduce_amount(items)
         expected_value = '45' 
-        self.assertEqual(expected_value, hmb.store['Item1']['Quantity'])
+        self.assertEqual(expected_value, hmb.store['B']['Quantity'])
+
+    def test_for_get_total(self):
+        pass
+
+    def test_for_get_correct_change(self):
+        pass
 
 if __name__ == '__main__':
    unittest.main() 

@@ -2,33 +2,28 @@
 
 class HeavyMetalBakeSale:
     def __init__(self):
-        self.__PURCHASE_CODES = {'B': 'Item1', 
-                                 'C': 'Item2', 
-                                 'M': 'Item3', 
-                                 'W': 'Item4'}
-
         self.store = {}
         self.expected_change = 0.00
 
     def init_store(self):
         
         self.store = {
-            'Item1': {
+            'B': {
                 'Brownie': '0.75',
                 'Quantity': '48',
                 'Purchase Code': 'B'
             },
-            'Item2': {
+            'M': {
                 'Muffin': '1.00',
                 'Quantity': '36',
                 'Purchase Code': 'M'
             },
-            'Item3': {
+            'C': {
                 'Cake Pop': '1.35',
                 'Quantity': '24',
                 'Purchase Code': 'C'
             },
-            'Item4': {
+            'W': {
                 'Water': '1.50',
                 'Quantity': '30',
                 'Purchase Code': 'W'
@@ -46,7 +41,7 @@ class HeavyMetalBakeSale:
 
     def check_for_items_valid(self, items_list):
         for item in items_list:
-            if item in self.__PURCHASE_CODES:
+            if item in self.store:
                 continue
             else:
                 return False
@@ -54,15 +49,17 @@ class HeavyMetalBakeSale:
         return True
 
     def quantity_available(self, item):
-        if int(self.store[self.__PURCHASE_CODES[item]]['Quantity']) < 1:
+        if int(self.store[item]['Quantity']) < 1:
             return False
         else:
             return True
 
     def reduce_amount(self, items_list):
         for item in items_list:
-           self.store[self.__PURCHASE_CODES[item]]['Quantity'] = int(self.store[self.__PURCHASE_CODES[item]]['Quantity']) - 1
-           self.store[self.__PURCHASE_CODES[item]]['Quantity'] = str(self.store[self.__PURCHASE_CODES[item]]['Quantity'])
+           self.store[item]['Quantity'] = int(self.store[item]['Quantity']) - 1
+           self.store[item]['Quantity'] = str(self.store[item]['Quantity'])
         
-
+    def get_total(self, items_list):
+        for item in items_list:
+            pass
 
