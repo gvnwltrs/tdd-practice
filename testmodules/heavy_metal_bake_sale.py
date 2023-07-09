@@ -9,35 +9,45 @@ class HeavyMetalBakeSale:
         
         self.store = {
             'B': {
-                'Brownie': '0.75',
+                'Item': 'Brownie',
+                'Price': '0.75',
                 'Quantity': '48',
                 'Purchase Code': 'B'
             },
             'M': {
-                'Muffin': '1.00',
+                'Item': 'Muffin',
+                'Price': '1.00',
                 'Quantity': '36',
                 'Purchase Code': 'M'
             },
             'C': {
-                'Cake Pop': '1.35',
+                'Item': 'Cake Pop',
+                'Price': '1.35',
                 'Quantity': '24',
                 'Purchase Code': 'C'
             },
             'W': {
-                'Water': '1.50',
+                'Item': 'Water',
+                'Price': '1.50',
                 'Quantity': '30',
                 'Purchase Code': 'W'
             },
 
         }
 
-    def purchase_items(self, items_list):
+    def purchase_items(self, items_list, payment=0.00):
         if not self.check_for_items_valid(items_list):
             return False
+        
+        quantity = self.reduce_amount(items_list)        
+        total_price = self.get_total(items_list)        
 
-        self.reduce_amount(items_list)        
+        if payment < total_price:
+            return False, 'Not enough money.'
 
-        return True
+        change = round(abs(payment - total_price), 2)
+
+        return True, change
 
     def check_for_items_valid(self, items_list):
         for item in items_list:
@@ -50,6 +60,7 @@ class HeavyMetalBakeSale:
 
     def quantity_available(self, item):
         if int(self.store[item]['Quantity']) < 1:
+            print('{0} is out of stock'.format(item))
             return False
         else:
             return True
@@ -60,6 +71,8 @@ class HeavyMetalBakeSale:
            self.store[item]['Quantity'] = str(self.store[item]['Quantity'])
         
     def get_total(self, items_list):
+        total_price = 0.00
         for item in items_list:
-            pass
-
+           total_price = total_price + float(self.store[item]['Price'])
+        
+        return total_price 

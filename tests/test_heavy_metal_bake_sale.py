@@ -38,19 +38,19 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
         self.assertTrue(expected_result) 
 
     def test_for_brownie(self):
-        expected_result = {'Brownie': '0.75', 'Quantity': '48', 'Purchase Code': 'B'}
+        expected_result = {'Item': 'Brownie', 'Price': '0.75', 'Quantity': '48', 'Purchase Code': 'B'}
         self.assertEqual(expected_result, self.hmb.store['B'])
         
     def test_for_muffin(self):
-        expected_result = {'Muffin': '1.00', 'Quantity': '36', 'Purchase Code': 'M'}
+        expected_result = {'Item': 'Muffin', 'Price': '1.00', 'Quantity': '36', 'Purchase Code': 'M'}
         self.assertEqual(expected_result, self.hmb.store['M'])
 
     def test_for_cake_pop(self):
-        expected_result = {'Cake Pop': '1.35', 'Quantity': '24', 'Purchase Code': 'C'}
+        expected_result = {'Item': 'Cake Pop', 'Price': '1.35', 'Quantity': '24', 'Purchase Code': 'C'}
         self.assertEqual(expected_result, self.hmb.store['C'])
 
     def test_for_water(self):
-        expected_result = {'Water': '1.50', 'Quantity': '30', 'Purchase Code': 'W'}
+        expected_result = {'Item': 'Water', 'Price': '1.50', 'Quantity': '30', 'Purchase Code': 'W'}
         self.assertEqual(expected_result, self.hmb.store['W'])
 
     def test_for_purchase_made(self):
@@ -70,6 +70,14 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
         item = 'B'
         item_available = self.hmb.quantity_available(item)
         self.assertTrue(item_available)
+
+    def test_for_quantity_not_available(self):
+        hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
+        hmb.init_store()
+        item = 'B'
+        hmb.store['B']['Quantity'] = '0'
+        item_available = hmb.quantity_available(item)
+        self.assertFalse(item_available)
     
     def test_for_reduced_quantity_for_purchase(self):
         items = ['B', 'B', 'B']
@@ -80,10 +88,28 @@ class TestHeavyMetalBakeSale(unittest.TestCase):
         self.assertEqual(expected_value, hmb.store['B']['Quantity'])
 
     def test_for_get_total(self):
-        pass
+        items = ['B', 'M', 'C', 'W']
+        hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
+        hmb.init_store()
+        total_amt = hmb.get_total(items)
+        expected_value = 4.60 
+        self.assertEqual(expected_value, total_amt) 
 
     def test_for_get_correct_change(self):
-        pass
+        items = ['B', 'M', 'C', 'W']
+        hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
+        hmb.init_store()
+        _, change = hmb.purchase_items(items, 4.70)
+        expected_value = 0.10 
+        self.assertEqual(expected_value, change) 
+
+    def test_for_get_not_enough_payment(self):
+        items = ['B', 'M', 'C', 'W']
+        hmb = HeavyMetalBakeSale.HeavyMetalBakeSale()
+        hmb.init_store()
+        _, output = hmb.purchase_items(items, 4.00)
+        expected_value = 'Not enough money.' 
+        self.assertEqual(expected_value, output) 
 
 if __name__ == '__main__':
    unittest.main() 
