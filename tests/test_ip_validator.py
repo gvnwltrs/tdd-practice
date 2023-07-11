@@ -11,9 +11,19 @@
 
 import unittest
 
+from testmodules.ip_validator import IPValidator
+
 class TestIPValidator(unittest.TestCase):
+
     def test_for_class(self):
-        pass
+        ipv = IPValidator() 
+        self.assertIsNotNone(ipv) 
+
+    def test_for_required_validate_ipv4_address_method(self):
+        ipv = IPValidator()
+        result = ipv.ValidateIpv4Address('192.168.1.1')
+        self.assertTrue(result)
+
 
 if __name__ == '__main__':
-    unitest.main()
+    unittest.main()
