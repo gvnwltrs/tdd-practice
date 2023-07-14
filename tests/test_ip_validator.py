@@ -24,6 +24,11 @@ class TestIPValidator(unittest.TestCase):
         result = ipv.ValidateIpv4Address('192.168.1.1')
         self.assertTrue(result)
 
+    def test_for_valid_ip_checker(self):
+        ipv = IPValidator()
+        ip_addr = '192.168.1.1'
+        result = ipv.valid_id_checker(ip_addr)
+        self.assertTrue(result)
 
 if __name__ == '__main__':
     unittest.main()
