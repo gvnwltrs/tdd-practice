@@ -21,13 +21,17 @@ class TestIPValidator(unittest.TestCase):
 
     def test_for_required_validate_ipv4_address_method(self):
         ipv = IPValidator()
-        result = ipv.ValidateIpv4Address('192.168.1.1')
+        result = ipv.ValidateIpv4Address()
         self.assertTrue(result)
 
     def test_for_valid_ip_checker(self):
         ipv = IPValidator()
-        ip_addr = '192.168.1.1'
-        result = ipv.valid_id_checker(ip_addr)
+        result = ipv.valid_id_checker()
+        self.assertTrue(result)
+    
+    def test_for_valid_num_octet(self):
+        ipv = IPValidator()
+        result = ipv.valid_num_octets()
         self.assertTrue(result)
 
 if __name__ == '__main__':

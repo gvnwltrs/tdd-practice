@@ -1,9 +1,8 @@
 #!/usr/bin/env python3 
 
-from testmodules.character_copier import CharacterCopier
+from testmodules.ip_validator import IPValidator
 
 if __name__ == '__main__':
-    cc = CharacterCopier()
+    ipv = IPValidator()
 
-    cc.copy('c')
-
+    ipv.valid_id_checker('192.168.1.1')
